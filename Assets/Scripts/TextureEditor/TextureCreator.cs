@@ -33,7 +33,7 @@ public class TextureCreator : MonoBehaviour
 
 	const int SIZE = 1024;
 
-	Texture2D texture = null;
+	public Texture2D texture = null;
 	Color[] pixelArr = null;
 
 	void Start()
@@ -259,7 +259,8 @@ public class TextureCreator : MonoBehaviour
 		Draw();
 	}
 
-	private void OnSaveFile(InputValue value) {
+	[ContextMenu("Save File")]
+	public void OnSaveFile() {
         var exporter = GetComponent<TextureExporter>();
         if (exporter != null) {
             exporter.ExportTexture(texture);

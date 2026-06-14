@@ -1,9 +1,4 @@
 ﻿<Solution>
-  <Metadata>
-    <ProjectDependencies />
-    <!-- Enable NuGet package restore for this solution -->
-    <NuGetRestore>true</NuGetRestore>
-  </Metadata>
-  <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
 </Solution>

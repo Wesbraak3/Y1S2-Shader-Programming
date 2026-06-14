@@ -162,37 +162,15 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Two Modifiers",
-                    "id": "a51bc922-11ee-4008-ab8b-5c5f4a56c92f",
-                    "path": "TwoModifiers",
+                    "name": "",
+                    "id": "371013d2-7f90-4d10-9d3b-4d42a4146d8e",
+                    "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "SaveFile",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier1",
-                    "id": "a812c4d1-bac3-473f-920a-d0826ab6e0ed",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SaveFile",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "modifier2",
-                    "id": "0201d3d0-4ea2-44c7-98fa-ed77b84b0b84",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SaveFile",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }
