@@ -23,17 +23,18 @@ Shader "Custom/SolidColorURP"
             #pragma vertex Vert
             #pragma fragment Frag
 
-            // changed to the newer version of the include? 
-            // #include "UnitySG.cginc"
+            // changed to the newer version of the include?
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             struct MeshData
             {
                 float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
             };
 
             struct v2f
             {
+                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
             };
 
@@ -43,15 +44,16 @@ Shader "Custom/SolidColorURP"
             v2f Vert(MeshData IN)
             {
                 v2f OUT;
-                
                 // using unity function to convert the localspace to worldspace and puts it in the right position in front of the camera
                 OUT.vertex = TransformObjectToHClip(IN.vertex); // Model View Projection
+                OUT.uv = IN.uv;
                 return OUT;
             }
 
             half4 Frag(v2f IN) : SV_Target
             {
-                return _Color;
+                half4 color = half4(IN.uv, 0, 1);
+                return color;
             }
 
             ENDHLSL
