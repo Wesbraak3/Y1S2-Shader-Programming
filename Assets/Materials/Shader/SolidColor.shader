@@ -38,7 +38,7 @@ Shader "Custom/SolidColorURP"
                 float4 vertex : SV_POSITION;
             };
 
-
+            sampler2D _MainTex;
             float4 _Color;
 
             v2f Vert(MeshData IN)
@@ -52,8 +52,9 @@ Shader "Custom/SolidColorURP"
 
             half4 Frag(v2f IN) : SV_Target
             {
-                half4 color = half4(IN.uv, 0, 1);
-                return color;
+                half4 textureColor = tex2D(_MainTex, IN.uv);
+                // half4 color = half4(IN.uv, 0, 1);
+                return textureColor;
             }
 
             ENDHLSL
