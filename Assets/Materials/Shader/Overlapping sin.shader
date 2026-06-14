@@ -1,9 +1,9 @@
-Shader "Custom/SolidColorURP"
+Shader "Custom/RandomPattern"
 {
     Properties
     {
-        _Color ("Color", Color) = (1,1,1,1)
-        _MainTex ("Texture", 2D) = "white" {}
+        _PrimairyColor ("Primairy Color", Color) = (1,1,1,1)
+        _SecondairyColor ("Secondairy Color", Color) = (1,1,1,1)
         _AnimateXY ("Animate XY", Vector) = (0,0,0,0)
     }
 
@@ -39,26 +39,43 @@ Shader "Custom/SolidColorURP"
                 float4 vertex : SV_POSITION;
             };
             
-            float4 _Color;
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
             float4 _AnimateXY;
+            float4 _PrimairyColor;
+            float4 _SecondairyColor;
 
             v2f Vert(MeshData IN)
             {
                 v2f OUT;
                 // using unity function to convert the localspace to worldspace and puts it in the right position in front of the camera
                 OUT.vertex = TransformObjectToHClip(IN.vertex); // Model View Projection
-                OUT.uv = TRANSFORM_TEX(IN.uv, _MainTex);
-                OUT.uv += frac(_AnimateXY.xy * _MainTex_ST * _Time.yy);
+                OUT.uv = IN.uv;
+                OUT.uv += _AnimateXY.xy * _Time.yy;
 
                 return OUT;
             }
 
-            half4 Frag(v2f IN) : SV_Target
+            float4 Frag(v2f IN) : SV_Target
             {
-                half4 textureColor = tex2D(_MainTex, IN.uv);
-                return textureColor;
+                float u = IN.uv.x;
+                float v = IN.uv.y;
+
+                float cos1 = (cos(u * PI * 2.0) + 1.0) * 0.5;
+                float cos2 = (sin(u * PI * 2.0 - PI / 1.5) + 1.0) * 0.5;
+                float cos3 = (tan(u * PI * 2.0 + PI / 1.5) + 1.0) * 0.5;
+            
+                float4 col1 = float4(1,0,0,1);
+                float4 col2 = float4(0,0,1,1);
+                float4 col3 = float4(0,1,0,1);
+            
+                float4 color = 0;
+            
+                color += col1 * step(v, cos1);
+                color += col2 * step(v, cos2);
+                color += col3 * step(v, cos3);
+            
+                color.a = 1;
+            
+                return color;
             }
 
             ENDHLSL
