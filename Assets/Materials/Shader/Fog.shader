@@ -44,9 +44,9 @@ Shader "Custom/Fog"
                 // unity method 
                 // float3 worldPos = ComputeWorldSpacePosition(IN.texcoord, depth, UNITY_MATRIX_I_VP);
                 
-                // TODO: Calc worldspace tyourtself.
+                // TODO: Calc worldspace tyourtself. UV ? NDC ? Clip ? World
                 float2 uv = IN.texcoord; // Screen Space
-                float2 ndc = uv * 2.0 - 1.0; // Normalized Device Coordinates 
+                float2 ndc = uv * 2.0 - 1.0; // Normalized Device Coordinates times 2 for 0?1 > 0?2 then -1 to shift it to -1?1
 
                 float4 clipPos = float4(ndc, depth, 1.0); // Clip Space
                 float4 world = mul(UNITY_MATRIX_I_VP, clipPos); // WorldSpace
