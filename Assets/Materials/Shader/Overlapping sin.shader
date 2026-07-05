@@ -46,8 +46,21 @@ Shader "Custom/RandomPattern"
             v2f Vert(MeshData IN)
             {
                 v2f OUT;
-                // using unity function to convert the localspace to worldspace and puts it in the right position in front of the camera
-                OUT.vertex = TransformObjectToHClip(IN.vertex); // Model View Projection
+
+                float4 worldPos = mul(UNITY_MATRIX_M, float4(IN.vertex.xyz, 1.0));
+                float4 viewPos  = mul(UNITY_MATRIX_V, worldPos);
+                float4 clipPos  = mul(UNITY_MATRIX_P, viewPos);
+
+                // this is the same as what im doing above just in a single step
+                // float4 clipPos = 
+                //     mul(UNITY_MATRIX_P,
+                //         mul(UNITY_MATRIX_V,
+                //             mul(UNITY_MATRIX_M, float4(IN.vertex.xyz,1))
+                //         )
+                //     );
+
+                OUT.vertex = clipPos;
+
                 OUT.uv = IN.uv;
                 OUT.uv += _AnimateXY.xy * _Time.yy;
 

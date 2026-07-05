@@ -48,7 +48,17 @@ public class DetectCrossing : MonoBehaviour
                 Vector3 a = towers[1].position - towers[0].position;
                 Vector3 b = towers[2].position - towers[0].position;
 
-                normal = Vector3.Cross(a, b).normalized;
+				// dot product but then 3d
+                // calculate .cross without unity .cross function
+                normal = new(
+					a.y * b.z - a.z * b.y,
+					a.z * b.x - a.x * b.z,
+					a.x * b.y - a.y * b.x
+				);
+
+                normal = normal.normalized;
+
+                //normal = Vector3.Cross(a, b).normalized;
             }
 
 			if (normalArrow!=null) {
